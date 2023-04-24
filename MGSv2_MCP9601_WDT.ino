@@ -1,8 +1,8 @@
 #include "Adafruit_MCP9601.h"
 #include <avr/wdt.h>
 
-uint16_t bootKey = 0x7777; // Arduino Leoardo and Micro
-uint16_t *const bootKeyPtr = (uint16_t *)0x0800; // Arduino Leoardo and Micro
+uint16_t bootKey = 0x7777; // Arduino Leonardo and Micro
+uint16_t *const bootKeyPtr = (uint16_t *)0x0800; // Arduino Leonardo and Micro
 
 #define I2C_ADDRESS (0x67)
 
