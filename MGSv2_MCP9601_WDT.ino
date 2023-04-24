@@ -1,8 +1,8 @@
 #include "Adafruit_MCP9601.h"
 #include <avr/wdt.h>
 
-uint16_t bootKey = 0x7777;
-uint16_t *const bootKeyPtr = (uint16_t *)0x0800;
+uint16_t bootKey = 0x7777; // Arduino Leoardo and Micro
+uint16_t *const bootKeyPtr = (uint16_t *)0x0800; // Arduino Leoardo and Micro
 
 #define I2C_ADDRESS (0x67)
 
@@ -151,7 +151,8 @@ void i2cSendValue(int T_value, int cycles)
 
 void software_reset()
 {
-    *bootKeyPtr = bootKey;
+    *bootKeyPtr = bootKey; // Arduino Leoardo and Micro
+    // wdt_disable(); // Other Arduino
     wdt_enable(WDTO_8S);
     while (1)
     {
