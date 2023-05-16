@@ -164,7 +164,7 @@ void software_reset()
         */
 
         // Serial.print("Th(degC),");
-        Serial.print(mcp.readThermocouple());
+        Serial.print(int((mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ) + 0.05) * 10) / 10);
         // Serial.print(",Tc(degC),");
         Serial.print(",");
         Serial.print(mcp.readAmbient());
@@ -173,7 +173,7 @@ void software_reset()
         Serial.print(mcp.readADC() * 2);
         Serial.print("\n");
 
-        i2cSendValue(int((mcp.readThermocouple() + 0.05) * 10), cycles); // Send the four characters to the display
+        i2cSendValue(int((mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ) + 0.05) * 10), cycles); // Send the four characters to the display
         cycles++;
 
         delay(1000);
