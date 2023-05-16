@@ -164,7 +164,7 @@ void software_reset()
         */
 
         // Serial.print("Th(degC),");
-        Serial.print(int((mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ) + 0.05) * 10) / 10);
+        Serial.print(mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ));
         // Serial.print(",Tc(degC),");
         Serial.print(",");
         Serial.print(mcp.readAmbient());
