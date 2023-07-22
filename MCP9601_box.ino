@@ -9,7 +9,7 @@
 Adafruit_MCP9601 mcp;
 
 #include <Wire.h>
-#define DISPLAY_ADDRESS1 0x20 // This is the default address of the OpenSegment with both solder jumpers open
+#define DISPLAY_ADDRESS1 0x23 // This is the default address of the OpenSegment with both solder jumpers open
 int cycles = 0;
 
 static uint8_t recv_cmd[8] = {};
@@ -109,14 +109,14 @@ void i2cSendValue(int T_value, int cycles)
     Wire.write(0x7A); // Brightness control command
     Wire.write(100);   // Set brightness level: 0% to 100%
 
-    if (cycles % 2 == 0)
+    if (abs(cycles) % 2 == 0)
     {
         // Wire.beginTransmission(DISPLAY_ADDRESS1); // transmit to device #1
         Wire.write(0x77);       // Decimal control command
         Wire.write(0b00000100); // Turn on far-right decimal
                                 // Wire.endTransmission(); //Stop I2C transmission
     }
-    if (cycles % 2 == 1)
+    if (abs(cycles) % 2 == 1)
     {
         // Wire.beginTransmission(DISPLAY_ADDRESS1); // transmit to device #1
         Wire.write(0x77);       // Decimal control command
@@ -164,7 +164,7 @@ void software_reset()
         */
 
         // Serial.print("Th(degC),");
-        Serial.print(mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ));
+        Serial.print(mcp.readThermocouple() - mcp.readThermocouple() * ( 0.7 / 100 ));
         // Serial.print(",Tc(degC),");
         Serial.print(",");
         Serial.print(mcp.readAmbient());
@@ -173,7 +173,7 @@ void software_reset()
         Serial.print(mcp.readADC() * 2);
         Serial.print("\n");
 
-        i2cSendValue(int((mcp.readThermocouple() + mcp.readThermocouple() * ( 4.5 / 100 ) + 0.05) * 10), cycles); // Send the four characters to the display
+        i2cSendValue(int((mcp.readThermocouple() - mcp.readThermocouple() * ( 0.7 / 100 ) + 0.05) * 10), cycles); // Send the four characters to the display
         cycles++;
 
         delay(1000);
