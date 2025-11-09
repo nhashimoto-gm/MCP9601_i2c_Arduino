@@ -33,10 +33,10 @@ INFLUX_URL = "http://www.xxxxxxxxxx.xxx:8086"
 INFLUX_TIMEOUT = 10000  # ミリ秒
 
 # データ検証範囲（フィールドごと）
-TEMP_MIN = -50.0
-TEMP_MAX = 200.0
-ADC_MIN = -200.0
-ADC_MAX = 200.0
+TEMP_MIN = -270.0
+TEMP_MAX = 800.0
+ADC_MIN = -5000.0
+ADC_MAX = 33000.0
 
 READ_INTERVAL = 0.5  # 秒
 
