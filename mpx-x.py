@@ -10,7 +10,7 @@ import socket
 
 # ロギング設定
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.INFO, # logging.WARNING,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler('sensor_log.log'),
